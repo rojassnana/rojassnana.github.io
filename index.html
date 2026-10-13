@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Turismo de Cruceros</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Lexend:ital,wght@0,300;0,500;1,300&display=swap">
+<style>
+:root{--navy:#055071;--mid:#2c6b8f;--sky:#3b97d3;--pale:#9fd0ec;--foam:#e6f3fb;--card:#fff;--ink:#055071;--bg1:#7cc4ea;--bg2:#3b97d3;--bg3:#2c6b8f;--sand:#f3e2b8;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--card:#0c2f45;--ink:#d9eefb;--foam:#123a54;--bg1:#0b3a5a;--bg2:#06283f;--bg3:#04192b;--sand:#6b5d3d}}
+:root[data-theme="dark"]{--card:#0c2f45;--ink:#d9eefb;--foam:#123a54;--bg1:#0b3a5a;--bg2:#06283f;--bg3:#04192b;--sand:#6b5d3d}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 56px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;font-family:Lexend,system-ui,sans-serif;font-weight:300;color:var(--ink);line-height:1.65;background:#3b97d3;background:linear-gradient(var(--bg1),var(--bg2) 55%,var(--bg3)) fixed;overflow-x:hidden}
+h1,h2,h3{font-family:Cinzel,Georgia,serif;text-transform:uppercase;margin:0;line-height:1.15}
+.bar{position:fixed;top:0;left:0;right:0;z-index:20;height:calc(env(safe-area-inset-top,0px) + 44px);padding-top:env(safe-area-inset-top,0px);background:var(--card);box-shadow:0 2px 12px #0003;display:flex;align-items:center;gap:6px;padding-left:10px;padding-right:10px;overflow-x:auto}
+.bar a{flex:none;color:var(--ink);text-decoration:none;font-weight:500;font-size:.85rem;padding:6px 12px;border-radius:99px}
+.bar a:hover,.bar a:focus-visible{background:var(--pale);color:#055071;outline:none}
+#theme{margin-left:auto;flex:none;border:0;background:var(--foam);border-radius:99px;width:34px;height:34px;cursor:pointer;font-size:1rem}
+.track{position:absolute;left:0;bottom:0;height:3px;width:100%;background:var(--pale)}
+#boat{position:absolute;bottom:-1px;left:0;font-size:1.2rem;transform:translate(-50%,0);transition:left .1s}
+#fill{height:3px;width:0;background:var(--sky)}
+.sun{position:fixed;top:70px;right:6%;width:90px;height:90px;border-radius:50%;background:radial-gradient(#fff6c8,#ffe27a 60%,#ffd24a);box-shadow:0 0 60px 20px #ffe27a66;z-index:0;opacity:.9}
+.cloud{position:fixed;z-index:0;font-size:3.2rem;opacity:.85;animation:drift 60s linear infinite}
+.c2{top:30vh;font-size:2.4rem;animation-duration:85s;animation-delay:-30s}
+@keyframes drift{from{left:-12%}to{left:108%}}
+.sea{position:fixed;left:0;right:0;bottom:0;height:120px;z-index:0;pointer-events:none}
+.sea svg{position:absolute;bottom:0;width:200%;height:100%;animation:wave 14s linear infinite}
+.sea svg:nth-child(2){animation-duration:9s;opacity:.7;height:75%}
+@keyframes wave{to{transform:translateX(-50%)}}
+main{position:relative;z-index:2;max-width:1000px;margin:0 auto;padding:0 16px 150px}
+section{margin:0 0 28px}
+.hero{min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding-top:90px;color:#fff}
+.hero small{font-weight:500;letter-spacing:.3em;font-style:italic}
+.hero h1{font-size:clamp(2.2rem,9vw,5rem);text-shadow:0 4px 18px #055071aa}
+.ship{width:min(420px,88%);margin:18px 0;animation:bob 4s ease-in-out infinite;cursor:pointer;filter:drop-shadow(0 12px 14px #05507188)}
+.ship:active{animation-duration:.6s}
+@keyframes bob{50%{transform:translateY(-10px) rotate(-1.5deg)}}
+.hint{background:#ffffff33;border-radius:99px;padding:6px 16px;font-size:.85rem}
+.card{background:var(--card);border-radius:28px;padding:26px;box-shadow:0 10px 30px #05507144}
+.card h2{font-size:clamp(1.5rem,5vw,2.3rem);margin-bottom:14px}
+.port{width:84px;height:84px;border-radius:50%;border:5px solid var(--pale);background:var(--foam);display:grid;place-items:center;font-size:2.4rem;flex:none}
+.acc{border-top:1px solid var(--pale)}
+.acc button{all:unset;box-sizing:border-box;width:100%;cursor:pointer;padding:12px 4px;font-weight:500;font-style:italic;display:flex;justify-content:space-between;gap:10px;color:var(--ink)}
+.acc button:focus-visible{outline:3px solid var(--sky);border-radius:8px}
+.acc button::after{content:"+";font-size:1.4rem;line-height:1;transition:.25s}
+.acc.open button::after{transform:rotate(45deg)}
+.acc div{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s}
+.acc.open div{grid-template-rows:1fr}
+.acc p{overflow:hidden;margin:0;font-style:italic;text-align:justify}
+.acc.open p{padding-bottom:12px}
+.chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:0;padding:0;list-style:none}
+.chip{all:unset;box-sizing:border-box;width:100%;cursor:pointer;display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--foam);border:2px solid var(--pale);border-radius:18px;font-weight:500;font-style:italic;transition:.2s}
+.chip span{font-size:1.5rem}
+.chip:hover{transform:translateY(-3px)}
+.chip:focus-visible{outline:3px solid var(--sky)}
+.chip.on{background:var(--sky);border-color:var(--sky);color:#fff;animation:pop .35s}
+@keyframes pop{50%{transform:scale(1.08) rotate(-2deg)}}
+.count{margin:14px 0 0;font-weight:500}
+.quote{margin-top:18px;background:var(--navy);color:#fff;border-radius:28px;padding:26px;position:relative;overflow:hidden}
+.quote::before{content:"\201D";position:absolute;right:14px;top:-30px;font:700 9rem Cinzel,serif;color:#ffffff22}
+.quote h3{font-size:clamp(1.2rem,4.5vw,1.9rem);position:relative}
+.tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.tab{all:unset;cursor:pointer;padding:10px 18px;border-radius:99px;background:var(--foam);font-weight:500;border:2px solid var(--pale)}
+.tab:focus-visible{outline:3px solid var(--sky)}
+.tab[aria-selected=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.panel{display:none;gap:18px;align-items:center;animation:fade .4s}
+.panel.show{display:flex}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}}
+.panel p{margin:0;font-style:italic;text-align:justify}
+.flip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.flip{all:unset;box-sizing:border-box;cursor:pointer;height:210px;perspective:900px;display:block}
+.flip:focus-visible{outline:3px solid #fff;border-radius:22px}
+.in{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.flip.on .in{transform:rotateY(180deg)}
+.f,.b{position:absolute;inset:0;border-radius:22px;backface-visibility:hidden;padding:16px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;box-shadow:0 8px 22px #05507144}
+.f{background:var(--card)}.f span{font-size:3rem}.f strong{font-family:Cinzel,serif;font-size:1.05rem}
+.b{background:var(--navy);color:#fff;transform:rotateY(180deg);font-size:.88rem;line-height:1.45}
+.note{color:#fff;font-size:.8rem;margin:10px 4px 0;font-style:italic}
+.q{margin:14px 0}.q p{font-weight:500;margin:0 0 8px}
+.opts{display:flex;gap:8px;flex-wrap:wrap}
+.opt{all:unset;cursor:pointer;padding:8px 14px;border-radius:14px;border:2px solid var(--pale);background:var(--foam)}
+.opt:focus-visible{outline:3px solid var(--sky)}
+.opt.ok{background:#2fa36b;border-color:#2fa36b;color:#fff}.opt.no{background:#d65a5a;border-color:#d65a5a;color:#fff;animation:shake .3s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.row{display:flex;gap:18px;align-items:flex-start}
+.concl{text-align:justify;font-style:italic;margin:0}
+.info{display:grid;gap:8px;margin-top:18px;padding:16px;border-radius:20px;background:var(--foam)}
+.info a{color:var(--ink)}
+.team{text-align:center;margin-top:16px;font-style:italic;font-size:.9rem}
+.rip{position:fixed;z-index:30;width:10px;height:10px;margin:-5px;border:3px solid #fff;border-radius:50%;pointer-events:none;animation:rip .9s forwards}
+@keyframes rip{to{transform:scale(10);opacity:0}}
+@media (max-width:620px){.panel.show,.row{flex-direction:column;text-align:center}.card{padding:20px}.sun{width:60px;height:60px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<nav class="bar" aria-label="Secciones">
+<a href="#inicio">Inicio</a><a href="#datos">Datos</a><a href="#actividades">Actividades</a><a href="#bolivia">Bolivia</a><a href="#curiosidades">Curiosidades</a><a href="#quiz">Quiz</a><a href="#conclusion">Conclusión</a>
+<button id="theme" aria-label="Cambiar tema claro u oscuro">🌙</button>
+<div class="track"><div id="fill"></div><span id="boat">⛵</span></div>
+</nav>
+<div class="sun"></div><div class="cloud" style="top:14vh">☁️</div><div class="cloud c2">☁️</div>
+<div class="sea" aria-hidden="true">
+<svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0 50Q150 10 300 50T600 50T900 50T1200 50V120H0Z" fill="#9fd0ec"/></svg>
+<svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0 60Q150 20 300 60T600 60T900 60T1200 60V120H0Z" fill="#3b97d3"/></svg>
+</div>
+
+<main>
+<section class="hero" id="inicio">
+<small>✈ TOURS</small>
+<h1>Turismo de cruceros</h1>
+<svg class="ship" id="ship" viewBox="0 0 400 200" role="img" aria-label="Crucero">
+<path d="M30 120h340l-34 52H70z" fill="#fff"/><path d="M52 150h296" stroke="#3b97d3" stroke-width="6"/>
+<rect x="70" y="84" width="250" height="36" rx="6" fill="#e6f3fb"/><rect x="110" y="52" width="170" height="32" rx="6" fill="#fff"/>
+<rect x="150" y="26" width="90" height="26" rx="6" fill="#9fd0ec"/><rect x="190" y="4" width="12" height="22" fill="#055071"/>
+<g fill="#3b97d3"><circle cx="90" cy="102" r="6"/><circle cx="125" cy="102" r="6"/><circle cx="160" cy="102" r="6"/><circle cx="195" cy="102" r="6"/><circle cx="230" cy="102" r="6"/><circle cx="265" cy="102" r="6"/><circle cx="300" cy="102" r="6"/></g>
+</svg>
+<span class="hint">Toca el barco o el mar para hacer olas 🌊</span>
+</section>
+
+<section class="card" id="datos">
+<div class="row"><div class="port">🚢</div><div style="flex:1"><h2>Datos</h2>
+<div class="acc open"><button aria-expanded="true">¿Que es un crucero?</button><div><p>Un <b>crucero</b> es tanto un barco de pasajeros de gran tamaño equipado como un hotel flotante, como el viaje de placer que se realiza a bordo de él</p></div></div>
+<div class="acc"><button aria-expanded="false">Definicion</button><div><p>El turismo de cruceros es una modalidad de viaje en la que los turistas disfrutan de sus vacaciones a bordo de un crucero, una embarcación que ofrece hospedaje, alimentación y entretenimiento mientras navega por océanos, mares, lagos y grandes ríos , a la vez que realiza paradas en diferentes destinos turísticos</p></div></div>
+</div></div>
+</section>
+
+<section class="card" id="actividades">
+<h2>Actividades que se realizan en un crucero</h2>
+<ul class="chips">
+<li><button class="chip"><span>🍽️</span>Gastronomía</button></li>
+<li><button class="chip"><span>🍹</span>Bebidas y bares</button></li>
+<li><button class="chip"><span>💆</span>Relajación y bienestar</button></li>
+<li><button class="chip"><span>🎭</span>Entretenimiento</button></li>
+<li><button class="chip"><span>⚽</span>Deportes</button></li>
+<li><button class="chip"><span>🎰</span>Casino</button></li>
+<li><button class="chip"><span>🛍️</span>Compras</button></li>
+<li><button class="chip"><span>👨‍👩‍👧</span>Actividades para niños y familias</button></li>
+<li><button class="chip"><span>🏆</span>Concursos y actividades familiares</button></li>
+</ul>
+<p class="count" id="count">Toca cada actividad para marcarla: 0 de 9</p>
+<div class="quote"><h3>“Bolivia navega entre la magia de sus lagos y el encanto de sus ríos.”</h3></div>
+</section>
+
+<section class="card" id="bolivia">
+<h2>Cruceros en Bolivia</h2>
+<div class="tabs" role="tablist">
+<button class="tab" role="tab" aria-selected="true" data-p="p1">Lago Titicaca</button>
+<button class="tab" role="tab" aria-selected="false" data-p="p2">Amazonía (Beni)</button></div>
+<div class="panel show" id="p1" role="tabpanel"><div class="port">⛵</div><p><b>Lago Titicaca:</b> Navegación en <b>catamaranes</b> desde Copacabana o Guaqui. Incluyen camarotes, comidas y visitas culturales a las islas del Sol y de la Luna.</p></div>
+<div class="panel" id="p2" role="tabpanel"><div class="port">🐬</div><p><b>Amazonía (Beni):</b> El hotel flotante <b>Reina de Enín</b> navega por los ríos Mamoré e Ibare. Está enfocado en la observación de delfines rosados, pesca y caminatas en la selva.</p></div>
+</section>
+
+<section id="curiosidades">
+<h2 style="color:#fff;margin-bottom:14px;font-size:clamp(1.5rem,5vw,2.3rem)">Curiosidades</h2>
+<div class="flip-grid">
+<button class="flip"><div class="in"><div class="f"><span>🏔️</span><strong>El lago más alto</strong></div><div class="b">El Titicaca suele considerarse el lago navegable más alto del mundo, a unos 3.800 m sobre el nivel del mar (aprox.).</div></div></button>
+<button class="flip"><div class="in"><div class="f"><span>🌾</span><strong>Barcos de totora</strong></div><div class="b">En el Titicaca se construyen embarcaciones con totora, una planta acuática. Es una tradición ancestral de la región.</div></div></button>
+<button class="flip"><div class="in"><div class="f"><span>☀️</span><strong>Isla del Sol</strong></div><div class="b">Según la tradición inca, de la Isla del Sol surgieron los primeros incas, Manco Cápac y Mama Ocllo.</div></div></button>
+<button class="flip"><div class="in"><div class="f"><span>🐬</span><strong>Delfín rosado</strong></div><div class="b">En los ríos amazónicos de Bolivia vive el delfín de río boliviano (Inia boliviensis), también llamado bufeo.</div></div></button>
+<button class="flip"><div class="in"><div class="f"><span>⚓</span><strong>Bolivia sin mar</strong></div><div class="b">Aunque no tiene costa, Bolivia tiene Fuerza Naval y navega en lagos y ríos. El 23 de marzo se celebra el Día del Mar.</div></div></button>
+<button class="flip"><div class="in"><div class="f"><span>🎢</span><strong>Ciudades flotantes</strong></div><div class="b">El Icon of the Seas, de la imagen del tríptico, es uno de los mayores cruceros del mundo: más de 5.000 pasajeros (aprox.).</div></div></button>
+</div>
+<p class="note">Toca las tarjetas para girarlas. Datos aproximados: verifícalos en fuentes oficiales.</p>
+</section>
+
+<section class="card" id="quiz">
+<h2>Pon a prueba lo aprendido</h2>
+<div class="q" data-a="1"><p>¿Qué embarcaciones navegan el Lago Titicaca?</p><div class="opts"><button class="opt">Submarinos</button><button class="opt">Catamaranes</button><button class="opt">Trenes</button></div></div>
+<div class="q" data-a="0"><p>¿Cómo se llama el hotel flotante del Beni?</p><div class="opts"><button class="opt">Reina de Enín</button><button class="opt">Isla del Sol</button><button class="opt">Titicaca</button></div></div>
+<div class="q" data-a="2"><p>¿Qué se observa en la Amazonía?</p><div class="opts"><button class="opt">Pingüinos</button><button class="opt">Ballenas</button><button class="opt">Delfines rosados</button></div></div>
+<p class="count" id="score">Puntaje: 0 de 3</p>
+</section>
+
+<section class="card" id="conclusion">
+<h2>Conclusion</h2>
+<p class="concl">El turismo de cruceros en Bolivia representa una oportunidad para descubrir la riqueza natural y cultural del país a través de sus aguas. Desde la belleza del lago Titicaca hasta la aventura amazónica del Flotel Reina de Enín en el Beni, estas experiencias permiten apreciar paisajes únicos, conocer nuevas culturas y promover un turismo responsable que valore y proteja nuestro patrimonio natural.</p>
+<div class="info">
+<span>📞 <a href="tel:+59176997032">+591 76997032</a></span>
+<span>✉️ <a href="#conclusion">NAVTUR Bolivia</a></span>
+<span>📍 Calle Potosí esquina Bueno N° 1499 (al lado del Museo Histórico Naval), La Paz.</span></div>
+<div class="team">Nombres: Liseth Lurdes Villca Quispe<br>Slim Rosario Mamani Rojas<br>Curso: 1ro B</div>
+</section>
+</main>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+function ripple(x,y){const r=document.createElement('span');r.className='rip';r.style.left=x+'px';r.style.top=y+'px';document.body.appendChild(r);setTimeout(()=>r.remove(),900)}
+addEventListener('pointerdown',e=>ripple(e.clientX,e.clientY));
+$$('.acc button').forEach(b=>b.onclick=()=>{const a=b.parentNode,o=a.classList.toggle('open');b.setAttribute('aria-expanded',o)});
+$$('.chip').forEach(c=>c.onclick=()=>{c.classList.toggle('on');const n=$$('.chip.on').length;$('#count').textContent=n===9?'🎉 ¡Zarpaste por todas las actividades! 9 de 9':'Toca cada actividad para marcarla: '+n+' de 9'});
+$$('.tab').forEach(t=>t.onclick=()=>{$$('.tab').forEach(x=>x.setAttribute('aria-selected',x===t));$$('.panel').forEach(p=>p.classList.toggle('show',p.id===t.dataset.p))});
+$$('.flip').forEach(f=>f.onclick=()=>f.classList.toggle('on'));
+let score=0;
+$$('.q').forEach(q=>{const opts=$$('.opt',q);opts.forEach((o,i)=>o.onclick=()=>{if(q.dataset.done)return;if(i==q.dataset.a){o.classList.add('ok');q.dataset.done=1;score++;$('#score').textContent='Puntaje: '+score+' de 3'+(score===3?' 🏆 ¡Excelente, capitán!':'')}else{o.classList.add('no')}})});
+$('#ship').onclick=()=>{const r=$('#ship').getBoundingClientRect();for(let i=0;i<4;i++)setTimeout(()=>ripple(r.left+r.width*(.2+.2*i),r.bottom-10),i*120)};
+const fill=$('#fill'),boat=$('#boat');
+function prog(){const h=document.documentElement.scrollHeight-innerHeight,p=h>0?scrollY/h*100:0;fill.style.width=p+'%';boat.style.left=Math.min(Math.max(p,2),98)+'%'}
+addEventListener('scroll',prog,{passive:true});prog();
+const tb=$('#theme');
+function setTheme(t){document.documentElement.dataset.theme=t;tb.textContent=t==='dark'?'☀️':'🌙'}
+setTheme(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+tb.onclick=()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark');
+</script>
+</body>
+</html>
